@@ -47,23 +47,29 @@ class LinkedList
    
 public:
     node *head;
-    node *tail;
     node* getHead(){
         return head;
     }
     LinkedList()
     {
-        head = tail = NULL;
+        head = NULL;
     }
      void insert(ThiSinh sv)
     {
         node *newNode = new node(sv);
-        if (head)
+        if (head == NULL)
         {
-            tail->next=newNode;
-            tail=tail->next;
+            head = newNode;
         }
-        else head=tail=newNode;
+        else
+        {
+            node *temp = head;
+            while (temp->next != NULL)
+            {
+                temp = temp->next;
+            }
+            temp->next = newNode;
+        }
     }
      bool Delete(string sbd, string name)
     {
@@ -242,10 +248,10 @@ void LinkedList::ghifile(){
         node* current = head; 
         while (current != NULL)
         {
-            outputFile << current->data.getname() << ", " << current->data.getcccd() << ", " << current->data.getgt() << ", "
+            outputFile << current->data.getname() << "," << current->data.getcccd() << "," << current->data.getgt() << ","
                        << current->data.getdate().day << "/" << current->data.getdate().month << "/" << current->data.getdate().year
-                       << ", " << current->data.getaddress() << ", " << current->data.getsbd() << ", " << current->data.getto()
-                       << ", " << current->data.getli() << ", " << current->data.gethoa() << endl;
+                       << "," << current->data.getaddress() << "," << current->data.getsbd() << "," << current->data.getto()
+                       << "," << current->data.getli() << "," << current->data.gethoa() << endl;
             
             current = current->next; 
         }

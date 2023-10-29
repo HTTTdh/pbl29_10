@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <stdio.h>
 #include <windows.h>
 #include <fstream>
 #include <iomanip>
@@ -35,7 +36,7 @@ bool CompareBySBD(ThiSinh &ts,string &sbd)
 
 bool CompareByYear(ThiSinh &ts,string &yearStr)
 {
-    int year = std::stoi(yearStr);
+    int year = stoi(yearStr);
     return (ts.getdate().year == year);
 }
 
@@ -53,7 +54,7 @@ void DisplayFilteredData(LinkedList &list, const string &message, CompareFunc co
     getline(cin, compareValue);
     compareValue = capitalizeFirstLetter(compareValue);
     Form();
-    while (p != nullptr)
+    while (p != NULL)
     {
         if (compareFunc(p->data, compareValue))
         {
@@ -134,7 +135,6 @@ void signin(string &name, string &sbd)
 }
 void edit_infor(LinkedList &ds, string sbd, string name)
 {
-    ds.docfile();
     node *p = ds.search(sbd, name);
     string New;
     int d;
@@ -192,6 +192,20 @@ void edit_infor(LinkedList &ds, string sbd, string name)
                 p->data.setaddress(newAddress);
             }
             break;
+         case 3:
+            if (ds.testempty())
+            {
+                cout << "Chưa có danh sách thí sinh dự thi." << endl;
+            }
+            else
+            {
+                string newCCCD;
+                cout << "Nhập số CCCD mới: ";
+                cin.ignore();
+                getline(cin, newCCCD);
+                p->data.setcccd(newCCCD);
+            }
+            break;
         case 4:
             if (ds.testempty())
             {
@@ -204,20 +218,6 @@ void edit_infor(LinkedList &ds, string sbd, string name)
                 cin.ignore();
                 getline(cin, sbdnew);
                 p->data.setsbd(sbdnew);
-            }
-            break;
-        case 3:
-            if (ds.testempty())
-            {
-                cout << "Chưa có danh sách thí sinh dự thi." << endl;
-            }
-            else
-            {
-                string newCCCD;
-                cout << "Nhập số CCCD mới: ";
-                cin.ignore();
-                getline(cin, newCCCD);
-                p->data.setcccd(newCCCD);
             }
             break;
             case 5:
@@ -270,10 +270,11 @@ void edit_infor(LinkedList &ds, string sbd, string name)
             }
             break;
         }
-        cout << "bạn có muốn tìm kiếm thông tin tiếp hay không?(y/n)";
+        cout << "bạn có muốn tìm kiếm thông tin tiếp hay không?(y/n) ";
         cin >> c;
     } while (c == "y" || c == "Y");
 }
+
 void TextColor(int x)//X là mã màu
 {
      HANDLE h= GetStdHandle(STD_OUTPUT_HANDLE);
@@ -408,7 +409,6 @@ int main()
         }
         case 7:
         {
-             mofile();
             output();
             system("pause");
             break;

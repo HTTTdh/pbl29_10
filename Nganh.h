@@ -66,6 +66,7 @@ void mofile()
 
 void output()
 {
+    mofile();
     Nganhdaotao *temp = pHead;
 
     cout << setw(100) << "DANH SÁCH CÁC NGÀNH ĐÀO TẠO" << endl;
