@@ -3,26 +3,18 @@
 #include <string>
 #include <fstream>
 #include <iomanip>
+#include <vector>
 #include"person.h"
 using namespace std;
 class ThiSinh : public Person
 {
-private:
+public:
     string sbd;
     float to, li, ho;
-    float sum;
-public:
+    float sum =to +li +ho;
+    vector<string> wishes;
     ThiSinh();
-    ThiSinh(string cccd, string name, Date date, string address, string gt, string sbd, float to, float li, float ho);
-    void setsbd(string sbd);
-    string getsbd();
-    void setto(float to);
-    float getto();
-    void setli(float li);
-    float getli();
-    void sethoa(float hoa);
-    float gethoa();
-    float getsum();
+    ThiSinh(string cccd, string name, Date date, string address, string gt, string sbd, float to, float li, float ho, vector<std::string> w);
     void input();
     void display();
     ~ThiSinh(){
@@ -37,42 +29,9 @@ ThiSinh::ThiSinh() : Person()
     li = 0;
     ho = 0;
 }
-ThiSinh::ThiSinh(string cccd, string name, Date date, string address, string gt, string sbd, float to, float li, float ho) : Person(cccd, name, date, address, gt), sbd(sbd), to(to), li(li), ho(ho){};
-void ThiSinh::setsbd(string sbd)
-{
-    this->sbd = sbd;
-}
-string ThiSinh::getsbd()
-{
-    return sbd;
-}
-void ThiSinh::setto(float to)
-{
-    this->to = to;
-}
-float ThiSinh::getto()
-{
-    return to;
-}
-void ThiSinh::setli(float li)
-{
-    this->li = li;
-}
-float ThiSinh::getli()
-{
-    return li;
-}
-void ThiSinh::sethoa(float hoa)
-{
-    this->ho = hoa;
-}
-float ThiSinh::gethoa()
-{
-    return ho;
-}
-float ThiSinh::getsum(){
-    return to+li+ho;
-}
+ThiSinh::ThiSinh(string cccd, string name, Date date, string address, string gt, string sbd, float to, float li, float ho, vector<std::string> w) : Person(cccd, name, date, address, gt), sbd(sbd), to(to), li(li), ho(ho){
+    wishes = w;
+};
 void ThiSinh::input()
 {
     for (int i = 0; i < 50; i++)
@@ -88,6 +47,16 @@ void ThiSinh::input()
     cin >> li;
     cout << "Nhập điểm hóa: ";
     cin >> ho;
+    int so_nv;
+    cout << "Số nguyện vọng bạn đăng kí : " ;
+    cin >> so_nv;
+   for (int i = 0; i < so_nv; i++){
+    cout << "Nguyện vọng " << i+1 << " : " ;
+    string nguyen_vong;
+    cin.ignore();
+    getline(cin, nguyen_vong);
+    wishes.push_back(nguyen_vong);
+}
     for (int i = 0; i < 50; i++)
         cout << "-";
     cout << endl;
@@ -98,14 +67,24 @@ void ThiSinh::display()
     for (int i = 0; i < 153; i++)
         cout << "-";
     cout << "|" << endl;
-    cout << "|" << getname() << setw(34 - getname().length()) << "|";
-    cout << getcccd() << setw(20 - getcccd().length()) << "|";
-    cout << setw(4) << getgt() << setw(4) << "|";
-    cout << getdate().day << "/" << getdate().month << "/" << getdate().year << setw(19 - getdate().sizedate()) << "|";
-    cout << getaddress() << setw(20 - getaddress().length()) << "|";
-    cout << getsbd() << setw(16 - getsbd().length()) << "|";
-    cout << setw(7) << getto() << setw(3) << "|";
-    cout << setw(5) << getli() << setw(3) << "|";
-    cout << setw(6) << gethoa() << setw(3) << "|";
-    cout << setw(5) << to + li + ho << setw(5) << "|" << endl;
+    cout << "|" << name << setw(34 - name.length()) << "|";
+    cout << cccd << setw(20 - cccd.length()) << "|";
+    cout << setw(4) << gt << setw(4) << "|";
+    cout << date.day << "/" << date.month << "/" << date.year << setw(19 - date.sizedate()) << "|";
+    cout << address<< setw(20 - address.length()) << "|";
+    cout << sbd << setw(16 - sbd.length()) << "|";
+    cout << setw(7) << to << setw(3) << "|";
+    cout << setw(5) << li << setw(3) << "|";
+    cout << setw(6) << ho << setw(3) << "|";
+    cout << setw(5) << to + li + ho << setw(5) << "|" ;
+   
+    // cout << name << " " << cccd << " " << gt << " " << date.day << "/" << date.month << "/" << date.year << " " << address << " " << sbd << " " 
+    // << to << " " << li << " " << ho << " " << sum << " ";
+    // for (string wish : wishes) {
+    //             cout << wish << " ";
+    //         }
+    cout << endl;
 }
+
+
+ 

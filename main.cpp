@@ -4,9 +4,7 @@
 #include <windows.h>
 #include <fstream>
 #include <iomanip>
-#include <stdexcept> 
-#include"person.h"
-#include"Thisinh.h"
+#include <stdexcept>
 #include"linklist.h"
 #include"Nganh.h"
 using namespace std;
@@ -16,34 +14,34 @@ typedef bool (*CompareFunc)(ThiSinh &, string &);
 
 bool CompareByName(ThiSinh &ts, string &name)
 {
-    return (ts.getname().find(name) != string::npos);
+    return (ts.name.find(name) != string::npos);
 }
 
 bool CompareByAddress(ThiSinh &ts,string &address)
 {
-    return (ts.getaddress().find(address) != string::npos);
+    return (ts.address.find(address) != string::npos);
 }
 
 bool CompareByCCCD(ThiSinh &ts,string &cccd)
 {
-    return (ts.getcccd().find(cccd) != string::npos);
+    return (ts.cccd.find(cccd) != string::npos);
 }
 
 bool CompareBySBD(ThiSinh &ts,string &sbd)
 {
-    return (ts.getsbd().find(sbd) != string::npos);
+    return (ts.sbd.find(sbd) != string::npos);
 }
 
 bool CompareByYear(ThiSinh &ts,string &yearStr)
 {
     int year = stoi(yearStr);
-    return (ts.getdate().year == year);
+    return (ts.date.year == year);
 }
 
 bool CompareByGender(ThiSinh &ts,  string &gender)
 {
     
-    return (ts.getgt().find(gender) != string::npos);
+    return (ts.gt.find(gender) != string::npos);
 }
 
 void DisplayFilteredData(LinkedList &list, const string &message, CompareFunc compareFunc, string compareValue)
@@ -175,7 +173,7 @@ void edit_infor(LinkedList &ds, string sbd, string name)
                 cout << "Nhập lại tên: ";
                 cin.ignore();
                 getline(cin, New);
-                p->data.setname(New);
+                p->data.name = New;
             }
             break;
         case 2:
@@ -189,7 +187,7 @@ void edit_infor(LinkedList &ds, string sbd, string name)
                 cout << "Nhập địa chỉ mới: ";
                 cin.ignore();
                 getline(cin, newAddress);
-                p->data.setaddress(newAddress);
+                 p->data.address = newAddress;
             }
             break;
          case 3:
@@ -203,7 +201,7 @@ void edit_infor(LinkedList &ds, string sbd, string name)
                 cout << "Nhập số CCCD mới: ";
                 cin.ignore();
                 getline(cin, newCCCD);
-                p->data.setcccd(newCCCD);
+                 p->data.cccd = newCCCD;
             }
             break;
         case 4:
@@ -217,7 +215,7 @@ void edit_infor(LinkedList &ds, string sbd, string name)
                 cout << "Nhập số báo danh mới: ";
                 cin.ignore();
                 getline(cin, sbdnew);
-                p->data.setsbd(sbdnew);
+                 p->data.sbd = sbdnew;
             }
             break;
             case 5:
@@ -227,14 +225,18 @@ void edit_infor(LinkedList &ds, string sbd, string name)
             }
             else
             {
+                int day, month, year;
                 cout << "Nhập lại ngày/tháng/năm sinh: " << endl;
                 cout << "Nhập ngày: ";
-                cin >> date.day;
+                cin >> day;
                 cout << "Nhập tháng: ";
-                cin >> date.month;
+                cin >> month;
                 cout << "Nhập năm: ";
-                cin >> date.year;
-                p->data.setdate(date);
+                cin >> year;
+                p->data.date.day = day;
+                p->data.date.month = month;
+                p->data.date.year = year;
+
             }
             break;
         case 6:
@@ -247,7 +249,8 @@ void edit_infor(LinkedList &ds, string sbd, string name)
                 string newgt;
                 cout << "Nhập giới tính mới: (0: Nam, 1: Nữ) ";
                 cin >> newgt;
-                p->data.setgt(newgt);
+                p->data.gt = newgt;
+
             }
             break;
         case 7:
@@ -264,9 +267,9 @@ void edit_infor(LinkedList &ds, string sbd, string name)
                 cin >> newPhysics;
                 cout << "Nhập điểm hóa mới: ";
                 cin >> newChemistry;
-                p->data.setto(newMath);
-                p->data.setli(newPhysics);
-                p->data.sethoa(newChemistry);
+                p->data.to=newMath;
+                p->data.to=newPhysics;
+                p->data.ho = newChemistry;
             }
             break;
         }
@@ -275,11 +278,43 @@ void edit_infor(LinkedList &ds, string sbd, string name)
     } while (c == "y" || c == "Y");
 }
 
-void TextColor(int x)//X là mã màu
+float tim_nghanh(string s)
 {
-     HANDLE h= GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(h, x);
+    string str ;
+    int result ;
+    mofile();
+    Nganhdaotao *p = pHead;
+            while (p != NULL)
+            {
+                result = strcmp(p->TenNganh.c_str(), s.c_str());
+                if (result == 0){
+                    return p->DiemChuan;
+                }
+                p = p->next;
+            }
+    cout << "Không có tên ngành này !" << endl;
+        return 0;
 }
+
+void check_dau(LinkedList &ds){
+    fflush(stdin);
+    ThiSinh thisinh;
+    string name;
+    string sbd;
+    string ten_nganh;
+    float diem ;
+    node *p = ds.search(sbd, name);
+    signin(name,sbd);
+    cout <<"Mời bạn nhập nghành muốn kiểm tra " ;
+    getline(cin, ten_nganh);
+    diem = tim_nghanh(ten_nganh);
+    if(ds.search(sbd,name) != NULL){
+        if(p->data.sum > diem)
+            cout << "Bạn đã đậu nghành " <<name <<endl;
+        else cout <<"Rất tiếc điểm của bạn chưa đủ đậu nghành " << name << endl;
+    }
+}
+
 int main()
 {
     LinkedList danhsach;
@@ -291,9 +326,9 @@ int main()
     do
     {
          system("cls");
-        TextColor(4);
+        //TextColor(4);
         cout << setw(135) << "~- QUẢN LÝ ĐIỂM THI CỦA CÁC THÍ SINH VÀO MỘT TRƯỜNG ĐẠI HỌC -~" << endl;
-        TextColor(10);
+        //TextColor(10);
         cout << setw(27);
         for (int i = 1; i <= 125; ++i)
             cout << "-";
@@ -312,11 +347,13 @@ int main()
         cout << setw(58) << "|" << setw(51) << "|" << endl;
         cout << setw(118) << "|   5. Tìm kiếm các thông tin của thí sinh.        |\n";
         cout << setw(58) << "|" << setw(51) << "|" << endl;
-        // cout << setw(121) << "|   6. Danh sách các thí sinh đậu đại học.         |\n";
-        // cout << setw(58) << "|" << setw(51) << "|" << endl;
+        cout << setw(121) << "|   6. Danh sách các thí sinh đậu đại học.         |\n";
+        cout << setw(58) << "|" << setw(51) << "|" << endl;
         cout << setw(117) << "|   7. Danh sách các ngành đào tạo.                |\n";
         cout << setw(58) << "|" << setw(51) << "|" << endl;
         cout << setw(118) << "|   8. Sắp xếp danh sách theo điểm.                |\n";
+        cout << setw(58) << "|" << setw(51) << "|" << endl;
+        cout << setw(119) << "|   9. Tìm điểm chuẩn của nghành.                  |\n";
         cout << setw(58) << "|" << setw(51) << "|" << endl;
         cout << setw(111) << "|   0. Thoát.                                      |\n";
         cout << setw(58) << "|" << setw(51) << "|" << endl;
@@ -325,10 +362,10 @@ int main()
             cout << "-";
         cout << "+" << endl;
         cout << endl;
-        TextColor(7);
+        //TextColor(7);
         cout << setw(80) << "Mời nhập lựa chọn : ";
         cin >> option;
-        while (option < 0 || option > 8)
+        while (option < 0 || option > 9)
         {
             fflush(stdin);
             cout << "Lựa chọn của bạn là không hợp lệ!!! \n Hãy nhập lại: ";
@@ -376,7 +413,6 @@ int main()
             if (danhsach.search(sbd, name) != NULL)
             {
                 edit_infor(danhsach, sbd, name);
-                danhsach.ghifile();
                 cout << "Đã cập nhật thông tin\n";
             }
             else
@@ -420,6 +456,23 @@ int main()
             system("pause");
             break;
         }
+        case 9:
+            {
+                string c ;
+                do{
+                    string name;
+                    fflush(stdin);
+                    cout << "\nNhập tên nghành muốn biết điểm chuẩn : " ;
+                    getline(cin,name);
+                    fflush(stdin);
+                    cout << "Điểm chuẩn của nghành "<< name << " : "<<tim_nghanh(name)<< endl;
+                    cout << "Bạn muốn biết tiếp tục tìm kiếm điểm chuẩn ? (y or n)" ;
+                    cin >> c;
+                }while(c == "y");
+                break;
+            }
         }
     } while (option != false);
+    return 0;
 }
+

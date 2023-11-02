@@ -4,8 +4,19 @@
 #include <iomanip>
 #include"person.h"
 #include"Thisinh.h"
-#include"node.h"
 using namespace std;
+
+class node
+{
+public:
+    ThiSinh data;
+    node *next;
+    node(ThiSinh ts)
+    {
+        data = ts;
+        next = NULL;
+    }
+};
 
 void Form()
 {
@@ -78,7 +89,7 @@ public:
         {
             node *pre;
             node *temp = head;
-            while (temp != NULL && p->data.getsbd() != temp->data.getsbd())
+            while (temp != NULL && p->data.sbd != temp->data.sbd)
             {
                 pre = temp;
                 temp = temp->next;
@@ -103,12 +114,13 @@ public:
             cout << "-";
         cout << "|" << endl;
     }
+
     node *search(string sbd, string name)
     {
         node *temp = head;
         while (temp != NULL)
         {
-            if (temp->data.getsbd().find(sbd) != string::npos && temp->data.getname().find(name) != string ::npos)
+            if (temp->data.sbd.find(sbd) != string::npos && temp->data.sbd.find(name) != string ::npos)
                 return temp;
             else
                 temp = temp->next;
@@ -143,7 +155,7 @@ public:
         // Lặp qua tất cả các phần tử và so sánh điểm của chúng
         for (int j = 0; j < count - i - 1; j++)
         {
-            if (ptr1->data.getsum() < ptr1->next->data.getsum())
+            if (ptr1->data.sum < ptr1->next->data.sum)
             {
                 // Hoán đổi nội dung giữa hai phần tử
                 ThiSinh temp = ptr1->data;
@@ -157,7 +169,9 @@ public:
         // Nếu không có phần tử nào được tráo đổi, thì danh sách đã được sắp xếp
         if (swapped == false)
             break;
+        
 }
+xuat();
 
     }
      bool testempty()
@@ -169,7 +183,7 @@ public:
         node *p = head;
         while (p != nullptr)
         {
-            if (p->data.getcccd().find(cccd) != string::npos)
+            if (p->data.cccd.find(cccd) != string::npos)
                 return true;
             p = p->next;
         }
@@ -182,64 +196,56 @@ public:
 void LinkedList::docfile()
 {
     ThiSinh ts;
-    ifstream inputFile;
-    inputFile.open("dsthisinh.txt", ios::in);
-    if (inputFile.is_open())
+    ifstream infile("dsthisinh.txt");
+    if (infile.is_open())
     {
         string line;
-        size_t pos;
-        while (getline(inputFile, line))
+        while (getline(infile, line))
         {
-            pos = line.find(",");
-            ts.setname(line.substr(0, pos));
-            line.erase(0, pos + 1);
-
-            pos = line.find(",");
-            ts.setcccd(line.substr(0, pos));
-            line.erase(0, pos + 1);
-
-            pos = line.find(",");
-            ts.setgt(line.substr(0,pos));
-            line.erase(0, pos + 1);
-
-            Date d;
-            pos = line.find("/");
-            d.day = stoi(line.substr(0, pos));
-            line.erase(0, pos + 1);
-            pos = line.find("/");
-            d.month = stoi(line.substr(0, pos));
-            line.erase(0, pos + 1);
-            pos = line.find(",");
-            d.year = stoi(line.substr(0, pos));
-            line.erase(0, pos + 1);
-            ts.setdate(d);
-
-            pos = line.find(",");
-            ts.setaddress(line.substr(0, pos));
-            line.erase(0, pos + 1);
-
-            pos = line.find(",");
-            ts.setsbd(line.substr(0, pos));
-            line.erase(0, pos + 1);
-
-            pos = line.find(",");
-            ts.setto(stof(line.substr(0, pos)));
-            line.erase(0, pos + 1);
-
-            pos = line.find(",");
-            ts.setli(stof(line.substr(0, pos)));
-            line.erase(0, pos + 1);
-
-            ts.sethoa(stof(line));
-            insert(ts);
+            stringstream ss(line);
+            string field;
+            vector<string> fields;
+            
+            while (getline(ss, field, ',')) {
+                fields.push_back(field);
+            }
+            
+            if (fields.size()) {
+                string name = fields[0];
+                string cccd = fields[1];
+                string gt = fields[2];
+            
+                string dob = fields[3];
+                stringstream ss_dob(dob);
+                string day_str, month_str, year_str;
+                getline(ss_dob, day_str, '/');
+                getline(ss_dob, month_str, '/');
+                getline(ss_dob, year_str, '/');
+                int day = stoi(day_str);
+                int month = stoi(month_str);
+                int year = stoi(year_str);
+            
+                string address = fields[4];
+                string sbd = fields[5];
+                float to = stof(fields[6]);
+                float li = stof(fields[7]);
+                float ho = stof(fields[8]);
+                vector<string> wishes;
+                string major;
+                 while (ss >> major) {
+            wishes.push_back(major);
         }
-
-        inputFile.close();
+                ThiSinh candidate(cccd, name, Date(day, month, year), address, gt, sbd, to, li, ho, wishes);
+                insert(candidate);
+            }
+        }
+        infile.close();
     }
     else {
         cout << "Không thể mở file." << endl;
     }
 }
+
 void LinkedList::ghifile(){
     ofstream outputFile;
     outputFile.open("dsthisinh.txt", ios::out);
@@ -248,16 +254,21 @@ void LinkedList::ghifile(){
         node* current = head; 
         while (current != NULL)
         {
-            outputFile << current->data.getname() << "," << current->data.getcccd() << "," << current->data.getgt() << ","
-                       << current->data.getdate().day << "/" << current->data.getdate().month << "/" << current->data.getdate().year
-                       << "," << current->data.getaddress() << "," << current->data.getsbd() << "," << current->data.getto()
-                       << "," << current->data.getli() << "," << current->data.gethoa() << endl;
-            
+            outputFile << current->data.name << "," << current->data.cccd << "," << current->data.gt << ","
+                       << current->data.date.day << "/" << current->data.date.month << "/" << current->data.date.year
+                       << "," << current->data.address<< "," << current->data.sbd << "," << current->data.to
+                       << "," << current->data.li << "," << current->data.ho;
+             for (string wish : current->data.wishes) {
+                outputFile  << "," << wish;
+            }
+            outputFile << endl;
             current = current->next; 
         }
+        
         outputFile.close();
     }
     else {
         cout << "Không thể mở file." << endl;
     }
 }
+

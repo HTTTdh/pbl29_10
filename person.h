@@ -4,30 +4,37 @@
 #include <fstream>
 #include <iomanip>
 #include <stdexcept> 
-#include"date.h"
 using namespace std;
+class Date
+{
+public:
+    int day, month, year;
+    int sizedate()
+    {
+        int m = 6;
+        if (day < 10)
+            m++;
+        else
+            m += 2;
+        if (month < 10)
+            m++;
+        else
+            m = m + 2;
+        return m;
+    }
+    Date(int day=0,int month=0, int year=0):day(day), month(month),year(year){}
+};
+
 class Person
 {
-protected:
+public:
     string cccd;
     string name;
     Date date;
     string address;
     string gt;
-
-public:
     Person();
     Person(string cccd, string name, Date date, string address, string gt);
-    void setcccd(string cccd);
-    string getcccd();
-    void setname(string name);
-    string getname();
-    void setdate(Date date);
-    Date getdate();
-    void setaddress(string address);
-    string getaddress();
-    void setgt(string gt);
-    string getgt();
     void nhapthongtin();
 };
 
@@ -42,48 +49,6 @@ Person::Person()
     gt ="";
 }
 Person::Person(string cccd, string name, Date date, string address, string gt) : cccd(cccd), name(name), date(date), address(address), gt(gt){};
-void Person::setcccd(string cccd)
-{
-    this->cccd = cccd;
-}
-string Person::getcccd()
-{
-    return cccd;
-}
-void Person::setname(string name)
-{
-    this->name = name;
-}
-string Person::getname()
-{
-    return name;
-}
-void Person::setdate(Date date)
-{
-    this->date.day = date.day;
-    this->date.month = date.month;
-    this->date.year = date.year;
-}
-Date Person::getdate()
-{
-    return date;
-}
-void Person::setaddress(string address)
-{
-    this->address = address;
-}
-string Person::getaddress()
-{
-    return address;
-}
-void Person::setgt(string gt)
-{
-    this->gt = gt;
-}
-string Person::getgt()
-{
-    return gt;
-}
 void Person::nhapthongtin()
 {
     fflush(stdin);
@@ -100,6 +65,6 @@ void Person::nhapthongtin()
     cin.ignore(1);
     cout << "Nhập địa chỉ (chỉ nhập tỉnh): ";
     getline(cin, address);
-    cout << "Nhập giới tính (Nam/): ";
+    cout << "Nhập giới tính (Nam/Nu): ";
     getline(cin,gt);
 }
