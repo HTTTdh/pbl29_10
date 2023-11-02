@@ -133,7 +133,7 @@ void signin(string &name, string &sbd)
 }
 void edit_infor(LinkedList &ds, string sbd, string name)
 {
-    node *p = ds.search(sbd, name);
+    node *p = ds.search(ds, sbd, name);
     string New;
     int d;
     string c;
@@ -277,58 +277,6 @@ void edit_infor(LinkedList &ds, string sbd, string name)
         cin >> c;
     } while (c == "y" || c == "Y");
 }
-
-
-//float LinkedList::searchnganh(string s)
-//{
-//    s = capitalizeFirstLetter(s);
-//    Nganhdaotao *p = pHead;
-//    while (p != NULL)
-//    {
-//        if (p->TenNganh == s)
-//            return p->DiemChuan;
-//        p = p->next;
-//    }
-//    cout << "Không có tên ngành này" << endl;
-//    return 0;
-//}
-//
-//
-//void LinkedList::check()
-//{
-//    int i = 0;
-//    LinkedList dsdau;
-//    node *temp = head;
-//    while (temp != NULL)
-//    {
-//        do
-//        {
-//            float dc = searchnganh(temp->data.getnv(i));
-//            if (dc && temp->data.getsum() > dc)
-//            {
-//                dsdau.insert(temp->data);
-//                break;
-//            }
-//            else if (dc==0)
-//                return;
-//            else
-//                i++;
-//        } while (i < temp->data.getspt());
-//        temp = temp->next;
-//    }
-//    dsdau.sapxepdiem();
-//}
-//while (temp != NULL)
-//{
-//    cout <<setw(41) << "|";
-//    for (int i = 0; i < 87; i++)
-//        cout << "-";
-//    cout << "|" << endl;
-//    cout << setw(41) << "|"  << temp->TenNganh << setw(39-(temp->TenNganh).length()) << "|";
-//    cout <<setw(16) << temp->MaNganh << setw(12) << "|";
-//    cout <<setw(12) << temp->DiemChuan << setw(9) << "|" << endl;
-//    temp = temp->next;
-//}
 float tim_nghanh(string s)
 {
     string str ;
@@ -354,12 +302,12 @@ void check_dau(LinkedList &ds){
     string sbd;
     string ten_nganh;
     float diem ;
-    node *p = ds.search(sbd, name);
+    node *p = ds.search(ds, sbd, name);
     signin(name,sbd);
     cout <<"Mời bạn nhập nghành muốn kiểm tra " ;
     getline(cin, ten_nganh);
     diem = tim_nghanh(ten_nganh);
-    if(ds.search(sbd,name) != NULL){
+    if(ds.search(ds, sbd,name) != NULL){
         if(p->data.sum > diem)
             cout << "Bạn đã đậu nghành " <<name <<endl;
         else cout <<"Rất tiếc điểm của bạn chưa đủ đậu nghành " << name << endl;
@@ -442,9 +390,9 @@ int main()
             cout << endl;
             cout << "Bạn muốn xóa thông tin của ai:" << endl;
              signin(name, sbd);
-            if (danhsach.search(sbd, name) != NULL)
+            if (danhsach.search(danhsach, sbd, name) != NULL)
             {
-                if (danhsach.Delete(sbd, name) == true)
+                if (danhsach.Delete(danhsach,sbd, name) == true)
                     cout << "Đã xóa thành công\n";
                 else
                     cout << "Không xóa được thông tin này" << endl;
@@ -461,7 +409,7 @@ int main()
             cout << endl;
             cout << "Bạn muốn sửa thông tin của ai:" << endl;
             signin(name, sbd);
-            if (danhsach.search(sbd, name) != NULL)
+            if (danhsach.search(danhsach, sbd, name) != NULL)
             {
                 edit_infor(danhsach, sbd, name);
                 danhsach.ghifile();
@@ -526,4 +474,3 @@ int main()
         }
     } while (option != false);
 }
-

@@ -82,9 +82,34 @@ public:
             temp->next = newNode;
         }
     }
-     bool Delete(string sbd, string name)
+     void xuat()
     {
-        node *p = search(sbd, name);
+        node *temp = head;
+        while (temp != NULL)
+        {
+            temp->data.display();
+            temp = temp->next;
+        }
+        cout << "|";
+        for (int i = 0; i < 153; i++)
+            cout << "-";
+        cout << "|" << endl;
+    }
+    node *search(LinkedList &ds, string sbd, string name)
+    {
+        node *temp = head;
+        while (temp != NULL)
+        {
+            if (temp->data.sbd.find(sbd) != string::npos && temp->data.sbd.find(name) != string ::npos)
+                return temp;
+            else
+                temp = temp->next;
+        }
+        return NULL;
+    }
+       bool Delete(LinkedList &ds,string sbd, string name)
+    {
+        node *p = search(ds, sbd, name);
         if (p != NULL)
         {
             node *pre;
@@ -100,31 +125,6 @@ public:
         }
         else
             return false;
-    }
-     void xuat()
-    {
-        node *temp = head;
-        while (temp != NULL)
-        {
-            temp->data.display();
-            temp = temp->next;
-        }
-        cout << "|";
-        for (int i = 0; i < 153; i++)
-            cout << "-";
-        cout << "|" << endl;
-    }
-    node *search(string sbd, string name)
-    {
-        node *temp = head;
-        while (temp != NULL)
-        {
-            if (temp->data.sbd.find(sbd) != string::npos && temp->data.sbd.find(name) != string ::npos)
-                return temp;
-            else
-                temp = temp->next;
-        }
-        return NULL;
     }
     void sapxepdiem(){
     if (head == NULL)
@@ -190,13 +190,15 @@ xuat();
     }
     void docfile();
     void ghifile();
+ 
+
 };
 
 void LinkedList::docfile()
 {
     ThiSinh ts;
     ifstream infile("dsthisinh.txt");
-  if (infile.is_open())
+ if (infile.is_open())
 {
   string line;
   while (getline(infile, line))
@@ -231,10 +233,12 @@ void LinkedList::docfile()
         float ho = stof(fields[8]);
 
         vector<string> wishes;
+
         if (fields.size() > 9) {
             stringstream ss_major(fields[9]);
             string major;
-            while (ss_major >> major) {
+            
+            while (getline(ss_major, major, ';')) { 
                 wishes.push_back(major);
             }
         }
@@ -243,6 +247,7 @@ void LinkedList::docfile()
         insert(candidate);
     }
 }
+
 
         infile.close();
     }
@@ -259,12 +264,12 @@ void LinkedList::ghifile(){
         node* current = head; 
         while (current != NULL)
         {
-            outputFile << current->data.name << ", " << current->data.cccd << ", " << current->data.gt << ", "
+            outputFile << current->data.name << "," << current->data.cccd << "," << current->data.gt << ","
                        << current->data.date.day << "/" << current->data.date.month << "/" << current->data.date.year
-                       << ", " << current->data.address<< ", " << current->data.sbd << ", " << current->data.to
-                       << ", " << current->data.li << ", " << current->data.ho;
+                       << "," << current->data.address<< "," << current->data.sbd << "," << current->data.to
+                       << "," << current->data.li << "," << current->data.ho << ",";
              for (string wish : current->data.wishes) {
-                outputFile  << ", " << wish;
+                outputFile  << wish << ";";
             }
             outputFile << endl;
             current = current->next; 
