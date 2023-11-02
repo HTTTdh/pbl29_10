@@ -50,39 +50,40 @@ void ThiSinh::input()
     int so_nv;
     cout << "Số nguyện vọng bạn đăng kí : " ;
     cin >> so_nv;
-   for (int i = 0; i < so_nv; i++){
-    cout << "Nguyện vọng " << i+1 << " : " ;
-    string nguyen_vong;
-    cin.ignore();
-    getline(cin, nguyen_vong);
-    wishes.push_back(nguyen_vong);
-}
+    fflush(stdin);
+    for (int i = 0; i < so_nv; i++){
+        string nv;
+        cout << "Nguyện vọng " << i << " : " ;
+        cin.ignore();
+        getline(cin,nv);
+        wishes.push_back(nv);
+    }
     for (int i = 0; i < 50; i++)
         cout << "-";
     cout << endl;
 }
 void ThiSinh::display()
 {
-    cout << "|";
-    for (int i = 0; i < 153; i++)
-        cout << "-";
-    cout << "|" << endl;
-    cout << "|" << name << setw(34 - name.length()) << "|";
-    cout << cccd << setw(20 - cccd.length()) << "|";
-    cout << setw(4) << gt << setw(4) << "|";
-    cout << date.day << "/" << date.month << "/" << date.year << setw(19 - date.sizedate()) << "|";
-    cout << address<< setw(20 - address.length()) << "|";
-    cout << sbd << setw(16 - sbd.length()) << "|";
-    cout << setw(7) << to << setw(3) << "|";
-    cout << setw(5) << li << setw(3) << "|";
-    cout << setw(6) << ho << setw(3) << "|";
-    cout << setw(5) << to + li + ho << setw(5) << "|" ;
+    // cout << "|";
+    // for (int i = 0; i < 153; i++)
+    //     cout << "-";
+    // cout << "|" << endl;
+    // cout << "|" << name << setw(34 - name.length()) << "|";
+    // cout << cccd << setw(20 - cccd.length()) << "|";
+    // cout << setw(4) << gt << setw(4) << "|";
+    // cout << date.day << "/" << date.month << "/" << date.year << setw(19 - date.sizedate()) << "|";
+    // cout << address<< setw(20 - address.length()) << "|";
+    // cout << sbd << setw(16 - sbd.length()) << "|";
+    // cout << setw(7) << to << setw(3) << "|";
+    // cout << setw(5) << li << setw(3) << "|";
+    // cout << setw(6) << ho << setw(3) << "|";
+    // cout << setw(5) << to + li + ho << setw(5) << "|" ;
    
-    // cout << name << " " << cccd << " " << gt << " " << date.day << "/" << date.month << "/" << date.year << " " << address << " " << sbd << " " 
-    // << to << " " << li << " " << ho << " " << sum << " ";
-    // for (string wish : wishes) {
-    //             cout << wish << " ";
-    //         }
+    cout << name << " " << cccd << " " << gt << " " << date.day << "/" << date.month << "/" << date.year << " " << address << " " << sbd << " " 
+    << to << " " << li << " " << ho << " " << to+li+ho << " ";
+    for (string wish : wishes) {
+                cout << wish << " ";
+            }
     cout << endl;
 }
 

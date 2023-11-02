@@ -114,7 +114,6 @@ public:
             cout << "-";
         cout << "|" << endl;
     }
-
     node *search(string sbd, string name)
     {
         node *temp = head;
@@ -197,48 +196,54 @@ void LinkedList::docfile()
 {
     ThiSinh ts;
     ifstream infile("dsthisinh.txt");
-    if (infile.is_open())
-    {
-        string line;
-        while (getline(infile, line))
-        {
-            stringstream ss(line);
-            string field;
-            vector<string> fields;
-            
-            while (getline(ss, field, ',')) {
-                fields.push_back(field);
+  if (infile.is_open())
+{
+  string line;
+  while (getline(infile, line))
+  {
+    stringstream ss(line);
+    string field;
+    vector<string> fields;
+
+    while (getline(ss, field, ',')) {
+        fields.push_back(field);
+    }
+
+    if (fields.size() >= 9) {
+        string name = fields[0];
+        string cccd = fields[1];
+        string gt = fields[2];
+
+        string dob = fields[3];
+        stringstream ss_dob(dob);
+        string day_str, month_str, year_str;
+        getline(ss_dob, day_str, '/');
+        getline(ss_dob, month_str, '/');
+        getline(ss_dob, year_str, '/');
+        int day = stoi(day_str);
+        int month = stoi(month_str);
+        int year = stoi(year_str);
+
+        string address = fields[4];
+        string sbd = fields[5];
+        float to = stof(fields[6]);
+        float li = stof(fields[7]);
+        float ho = stof(fields[8]);
+
+        vector<string> wishes;
+        if (fields.size() > 9) {
+            stringstream ss_major(fields[9]);
+            string major;
+            while (ss_major >> major) {
+                wishes.push_back(major);
             }
-            
-            if (fields.size()) {
-                string name = fields[0];
-                string cccd = fields[1];
-                string gt = fields[2];
-            
-                string dob = fields[3];
-                stringstream ss_dob(dob);
-                string day_str, month_str, year_str;
-                getline(ss_dob, day_str, '/');
-                getline(ss_dob, month_str, '/');
-                getline(ss_dob, year_str, '/');
-                int day = stoi(day_str);
-                int month = stoi(month_str);
-                int year = stoi(year_str);
-            
-                string address = fields[4];
-                string sbd = fields[5];
-                float to = stof(fields[6]);
-                float li = stof(fields[7]);
-                float ho = stof(fields[8]);
-                vector<string> wishes;
-                string major;
-                 while (ss >> major) {
-            wishes.push_back(major);
         }
-                ThiSinh candidate(cccd, name, Date(day, month, year), address, gt, sbd, to, li, ho, wishes);
-                insert(candidate);
-            }
-        }
+
+        ThiSinh candidate(cccd, name, Date(day, month, year), address, gt, sbd, to, li, ho, wishes);
+        insert(candidate);
+    }
+}
+
         infile.close();
     }
     else {
@@ -254,21 +259,19 @@ void LinkedList::ghifile(){
         node* current = head; 
         while (current != NULL)
         {
-            outputFile << current->data.name << "," << current->data.cccd << "," << current->data.gt << ","
+            outputFile << current->data.name << ", " << current->data.cccd << ", " << current->data.gt << ", "
                        << current->data.date.day << "/" << current->data.date.month << "/" << current->data.date.year
-                       << "," << current->data.address<< "," << current->data.sbd << "," << current->data.to
-                       << "," << current->data.li << "," << current->data.ho;
+                       << ", " << current->data.address<< ", " << current->data.sbd << ", " << current->data.to
+                       << ", " << current->data.li << ", " << current->data.ho;
              for (string wish : current->data.wishes) {
-                outputFile  << "," << wish;
+                outputFile  << ", " << wish;
             }
             outputFile << endl;
             current = current->next; 
         }
-        
         outputFile.close();
     }
     else {
         cout << "Không thể mở file." << endl;
     }
 }
-

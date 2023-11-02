@@ -1,35 +1,36 @@
-Hoang Tuan Anh, 040346278912,Nam ,2/7/2004, Nghe An, 29416473,8,7.75,8.25
-Mai Thi Kim Anh,040373829102,Nu ,3/2/2004, Can Tho, 55417342,6.6,7.5,8
-Nguyen Thi Minh Anh, 041927302729, Nu,31/10/2004, Nghe An, 29834295,9,7,8.5
-Nguyen Tuan Anh, 041829365271, Nam,14/6/2004, Thai Nguyen, 12516387,8.4,7,9.5
-Vo Quoc Anh, 043829887216, Nam,22/12/2004, Bac Giang, 18128945,7.8,8,7.25
-Hoang Tan Bao,040371947399, Nam,2/8/2004, Ninh Binh, 27634285,4.6,6.5,7
-Nguyen Thi Thanh Binh, 040343189567, Nu,20/2/2003, Thanh Hoa, 28417483,8.8,9,8
-Vo Quoc Cuong, 041054287354, Nam,1/6/2004, Bac Kan, 11723290,9.2,8,8
-Hoang Thi Thuy Duong, 049187427534, Nu,20/7/2004, Quang Nam, 34281546,8.4,7.75,9
-Nguyen Hoang Dat, 040391827463, Nam,30/1/2003, Da Nang, 04231872,6.2,7.25,7.5
-Nguyen Huy Hoang, 040392715382, Nam,5/2/2002, Ca Mau, 61934289,9.2,7.75,8.25
-Nguyen Van Hoang, 048261728455, Nam,23/4/2004, Binh Duong, 44617584,3.6,5.5,6.25
-Phung Ngoc Hung, 040291768411, Nam,20/10/2001, Ha Tinh, 30724346,8.6,8.75,9
-Vo Thi Khanh Huyen, 042971529621, Nu,12/12/2002, Bac Ninh, 19452948,6.4,5.5,6
-Cao Minh Hung, 049274633182, Nam,10/3/2004, Gia Lai, 38528564,8,7.25,8
-Nguyen Duy Hung, 040283518362, Nam,12/6/2004, Hoa Binh, 23527887,6.8,7.5,7
-Nguyen Quoc Khanh, 042546193527, Nu,5/8/2004, Dong Nai, 48748352,9.5,8.75,9
-Nguyen Dinh Khiem, 046271188725, Nam,13/4/2004, Gia Lai, 38274538,4.4,5.25,4.5
-Nguyen Le Dieu Linh, 040382510452, Nu,24/7/2004, Ha Giang, 05296547,9.4,8.75,9
-Nguyen Phuong Linh, 040262819332, Nu,20/10/2004, Hai Duong, 21318453,7.4,8.5,8
-Nguyen Duc Luong, 042719245378, Nam,22/11/2003, Ha Tinh, 30378767,8.4,8.75,9
-Nguyen Thi Tra My,040251637284, Nu,27/9/2004, Quang Tri, 32318352,9,8.5,9.25
-Nguyen Sy Nam, 042418452064, Nam,8/12/2004, Nghe An, 29327813,9,8.5,9.25
-Tran Duc Nguyen, 044362416291, Nam,6/6/2001, Quang Nam, 34724195,6.4,5.75,7
-Nguyen Dinh Nhan, 048264537193, Nam,1/7/2004, Hung Yen, 22628146,4.5,6.25,5
-Mai Thuc Nhi, 043236782416, Nu,18/5/2004, Khanh Hoa, 41286537,6.2,6.75,6
-Nguyen Thi Quynh Nhi, 048321745382, Nu,3/4/2004, Long An, 49427483,8.4,7,7.75
-Nguyen Le Uyen Nhi, 037285637591, Nu,30/4/2004, Quang Ninh, 17416564,8.2,7.5,7.5
-Nguyen Thi Quynh Nhu, 048212314536, Nu,15/2/2004, Nam Dinh, 25824175,8.6,7.25,9
-Nguyen Ngoc Hoang Phuc, 046214638921, Nam,28/5/2004, Phu Tho, 15218453,8.8,9.25,8.25
-Hoang Hong Quan, 042618453628, Nam,31/12/2004, Phu Yen, 39628195,7.2,5.75,7.75
-Nguyen Anh Tai, 042327185632, Nam,12/11/2004, Ninh Thuan, 45317342,8.2,8,9
-Nguyen Thanh Tan, 041642482516, Nam,23/2/2004, Phu Yen, 39327581,5.2,4.25,6
-Che Ngoc Thai, 040342612175, Nam,11/5/2004, Quang Ngai, 35527153,7.2,6.75,7.5
-Nguyen Trong Thang, 040274123478, Nam,31/10/2004, Dak Lak, 40317483,8.2,7.5,8.75
+Hoang Tuan Anh,  040346278912, Nam , 2/7/2004,  Nghe An,  29416473, 8, 7.75, 8.25, cong, nghe, thong, tin
+Mai Thi Kim Anh, 040373829102, Nu , 3/2/2004,  Can Tho,  55417342, 6.6, 7.5, 8, cong, nghe, thuc, pham
+Nguyen Thi Minh Anh,  041927302729,  Nu, 31/10/2004,  Nghe An,  29834295, 9, 7, 8.5, dien, tu, vien, thong
+Nguyen Tuan Anh,  041829365271,  Nam, 14/6/2004,  Thai Nguyen,  12516387, 8.4, 7, 9.5, cong, nghe, thong, tin
+Vo Quoc Anh,  043829887216,  Nam, 22/12/2004,  Bac Giang,  18128945, 7.8, 8, 7.25, cong, nghe, thuc, pham
+Hoang Tan Bao, 040371947399,  Nam, 2/8/2004,  Ninh Binh,  27634285, 4.6, 6.5, 7, cong, nghe, thong, tin
+Nguyen Thi Thanh Binh,  040343189567,  Nu, 20/2/2003,  Thanh Hoa,  28417483, 8.8, 9, 8, dien, tu, vien, thong
+Vo Quoc Cuong,  041054287354,  Nam, 1/6/2004,  Bac Kan,  11723290, 9.2, 8, 8, cong, nghe, thuc, pham
+Hoang Thi Thuy Duong,  049187427534,  Nu, 20/7/2004,  Quang Nam,  34281546, 8.4, 7.75, 9, cong, nghe, thong, tin
+Nguyen Hoang Dat,  040391827463,  Nam, 30/1/2003,  Da Nang,  04231872, 6.2, 7.25, 7.5, cong, nghe, thong, tin
+Nguyen Huy Hoang,  040392715382,  Nam, 5/2/2002,  Ca Mau,  61934289, 9.2, 7.75, 8.25, dien, tu, vien, thong
+Nguyen Van Hoang,  048261728455,  Nam, 23/4/2004,  Binh Duong,  44617584, 3.6, 5.5, 6.25, cong, nghe, thuc, pham
+Phung Ngoc Hung,  040291768411,  Nam, 20/10/2001,  Ha Tinh,  30724346, 8.6, 8.75, 9, dien, tu, vien, thong
+Vo Thi Khanh Huyen,  042971529621,  Nu, 12/12/2002,  Bac Ninh,  19452948, 6.4, 5.5, 6, cong, nghe, thuc, pham
+Cao Minh Hung,  049274633182,  Nam, 10/3/2004,  Gia Lai,  38528564, 8, 7.25, 8, dien, tu, vien, thong
+Nguyen Duy Hung,  040283518362,  Nam, 12/6/2004,  Hoa Binh,  23527887, 6.8, 7.5, 7, cong, nghe, thuc, pham
+Nguyen Quoc Khanh,  042546193527,  Nu, 5/8/2004,  Dong Nai,  48748352, 9.5, 8.75, 9, cong, nghe, thong, tin
+Nguyen Dinh Khiem,  046271188725,  Nam, 13/4/2004,  Gia Lai,  38274538, 4.4, 5.25, 4.5, cong, nghe, thong, tin
+Nguyen Le Dieu Linh,  040382510452,  Nu, 24/7/2004,  Ha Giang,  05296547, 9.4, 8.75, 9, dien, tu, vien, thong
+Nguyen Phuong Linh,  040262819332,  Nu, 20/10/2004,  Hai Duong,  21318453, 7.4, 8.5, 8, cong, nghe, thuc, pham
+Nguyen Duc Luong,  042719245378,  Nam, 22/11/2003,  Ha Tinh,  30378767, 8.4, 8.75, 9, cong, nghe, thuc, pham
+Nguyen Thi Tra My, 040251637284,  Nu, 27/9/2004,  Quang Tri,  32318352, 9, 8.5, 9.25, cong, nghe, thuc, pham
+Nguyen Sy Nam,  042418452064,  Nam, 8/12/2004,  Nghe An,  29327813, 9, 8.5, 9.25, dien, tu, vien, thong
+Tran Duc Nguyen,  044362416291,  Nam, 6/6/2001,  Quang Nam,  34724195, 6.4, 5.75, 7, dien, tu, vien, thong
+Nguyen Dinh Nhan,  048264537193,  Nam, 1/7/2004,  Hung Yen,  22628146, 4.5, 6.25, 5, cong, nghe, thuc, pham
+Mai Thuc Nhi,  043236782416,  Nu, 18/5/2004,  Khanh Hoa,  41286537, 6.2, 6.75, 6, dien, tu, vien, thong
+Nguyen Thi Quynh Nhi,  048321745382,  Nu, 3/4/2004,  Long An,  49427483, 8.4, 7, 7.75, cong, nghe, thuc, pham
+Nguyen Le Uyen Nhi,  037285637591,  Nu, 30/4/2004,  Quang Ninh,  17416564, 8.2, 7.5, 7.5, cong, nghe, thuc, pham
+Nguyen Thi Quynh Nhu,  048212314536,  Nu, 15/2/2004,  Nam Dinh,  25824175, 8.6, 7.25, 9, dien, tu, vien, thong
+Nguyen Ngoc Hoang Phuc,  046214638921,  Nam, 28/5/2004,  Phu Tho,  15218453, 8.8, 9.25, 8.25, cong, nghe, thuc, pham
+Hoang Hong Quan,  042618453628,  Nam, 31/12/2004,  Phu Yen,  39628195, 7.2, 5.75, 7.75, dien, tu, vien, thong
+Nguyen Anh Tai,  042327185632,  Nam, 12/11/2004,  Ninh Thuan,  45317342, 8.2, 8, 9, cong, nghe, thong, tin
+Nguyen Thanh Tan,  041642482516,  Nam, 23/2/2004,  Phu Yen,  39327581, 5.2, 4.25, 6, cong, nghe, thuc, pham
+Che Ngoc Thai,  040342612175,  Nam, 11/5/2004,  Quang Ngai,  35527153, 7.2, 6.75, 7.5, cong, nghe, thong, tin
+Nguyen Trong Thang,  040274123478,  Nam, 31/10/2004,  Dak Lak,  40317483, 8.2, 7.5, 8.75, cong, nghe, thong, tin
+ho thi thu thanh, 049304012028, nu, 5/1/2004, quang nam, 34006760, 9, 9, 9, ntt, ntp

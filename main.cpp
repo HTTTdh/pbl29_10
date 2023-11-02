@@ -278,6 +278,57 @@ void edit_infor(LinkedList &ds, string sbd, string name)
     } while (c == "y" || c == "Y");
 }
 
+
+//float LinkedList::searchnganh(string s)
+//{
+//    s = capitalizeFirstLetter(s);
+//    Nganhdaotao *p = pHead;
+//    while (p != NULL)
+//    {
+//        if (p->TenNganh == s)
+//            return p->DiemChuan;
+//        p = p->next;
+//    }
+//    cout << "Không có tên ngành này" << endl;
+//    return 0;
+//}
+//
+//
+//void LinkedList::check()
+//{
+//    int i = 0;
+//    LinkedList dsdau;
+//    node *temp = head;
+//    while (temp != NULL)
+//    {
+//        do
+//        {
+//            float dc = searchnganh(temp->data.getnv(i));
+//            if (dc && temp->data.getsum() > dc)
+//            {
+//                dsdau.insert(temp->data);
+//                break;
+//            }
+//            else if (dc==0)
+//                return;
+//            else
+//                i++;
+//        } while (i < temp->data.getspt());
+//        temp = temp->next;
+//    }
+//    dsdau.sapxepdiem();
+//}
+//while (temp != NULL)
+//{
+//    cout <<setw(41) << "|";
+//    for (int i = 0; i < 87; i++)
+//        cout << "-";
+//    cout << "|" << endl;
+//    cout << setw(41) << "|"  << temp->TenNganh << setw(39-(temp->TenNganh).length()) << "|";
+//    cout <<setw(16) << temp->MaNganh << setw(12) << "|";
+//    cout <<setw(12) << temp->DiemChuan << setw(9) << "|" << endl;
+//    temp = temp->next;
+//}
 float tim_nghanh(string s)
 {
     string str ;
@@ -413,6 +464,7 @@ int main()
             if (danhsach.search(sbd, name) != NULL)
             {
                 edit_infor(danhsach, sbd, name);
+                danhsach.ghifile();
                 cout << "Đã cập nhật thông tin\n";
             }
             else
@@ -473,6 +525,5 @@ int main()
             }
         }
     } while (option != false);
-    return 0;
 }
 
