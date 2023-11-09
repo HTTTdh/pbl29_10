@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <stdexcept> 
+#include "mylib.h"
 using namespace std;
 class Date
 {
@@ -27,17 +28,58 @@ public:
 
 class Person
 {
-public:
     string cccd;
     string name;
     Date date;
     string address;
     string gt;
+    public:
+    void setcccd(string cccd);
+    void setname(string name);
+    void setdate(int, int, int);
+    void setaddress(string address);
+    void setgt(string gt);
+    string getcccd();
+    string getname();
+    Date getdate();
+    string getaddress();
+    string getgt();
     Person();
     Person(string cccd, string name, Date date, string address, string gt);
     void nhapthongtin();
 };
-
+ void Person::setcccd(string cccd){
+    this->cccd = cccd;
+ }
+void Person::setname(string name){
+    this->name = name;
+}
+void Person::setdate(int day, int month, int year){
+    this->date.day = day;
+    this->date.month = month;
+    this->date.year = year;
+}
+    void Person:: setaddress(string address){
+        this->address = address;
+}
+void Person::setgt(string gt){
+    this->gt = gt;
+}
+    string Person:: getcccd(){
+        return cccd;
+    }
+    string Person:: getname(){
+        return name;
+    }
+    Date Person:: getdate(){
+        return date;
+    }
+    string Person::getaddress(){
+        return address;
+    }
+    string Person:: getgt(){
+        return gt;
+    }
 Person::Person()
 {
     cccd = "";
@@ -52,19 +94,26 @@ Person::Person(string cccd, string name, Date date, string address, string gt) :
 void Person::nhapthongtin()
 {
     fflush(stdin);
-    cout << "Nhập họ tên: ";
+	gotoXY(22, 4);
+    cout  << "Ho ten: ";
     getline(cin, name);
-    cout << "Nhập số cccd: ";
+    gotoXY(22, 5);
+    cout  << "So cccd: ";
     getline(cin, cccd);
-    cout << "Nhập ngày sinh: ";
+     gotoXY(22, 6);
+    cout <<  "Ngay sinh: ";
     cin >> date.day;
-    cout << "Nhập tháng sinh: ";
+     gotoXY(22,7);
+    cout << "Thang sinh: ";
     cin >> date.month;
-    cout << "Nhập năm sinh: ";
+     gotoXY(22,8);
+    cout  << "Nam sinh: ";
     cin >> date.year;
+     gotoXY(22,9);
     cin.ignore(1);
-    cout << "Nhập địa chỉ (chỉ nhập tỉnh): ";
+    cout  << "Dia chi (chi nhap tinh): ";
     getline(cin, address);
-    cout << "Nhập giới tính (Nam/Nu): ";
+     gotoXY(22,10);
+    cout << "Gioi tinh (Nam/Nu): ";
     getline(cin,gt);
 }

@@ -1,476 +1,388 @@
 #include <iostream>
-#include <string>
-#include <stdio.h>
 #include <windows.h>
-#include <fstream>
-#include <iomanip>
-#include <stdexcept>
-#include"linklist.h"
-#include"Nganh.h"
+#include <string>
+#include <unistd.h>
+#include "mylib.h"
+#include "main.h"
+
 using namespace std;
+int x = 65;
+int y = 5;
 
-
-typedef bool (*CompareFunc)(ThiSinh &, string &);
-
-bool CompareByName(ThiSinh &ts, string &name)
+void box(int x, int y, int w, int h, int t_color, int b_color, string tieude)
 {
-    return (ts.name.find(name) != string::npos);
-}
-
-bool CompareByAddress(ThiSinh &ts,string &address)
-{
-    return (ts.address.find(address) != string::npos);
-}
-
-bool CompareByCCCD(ThiSinh &ts,string &cccd)
-{
-    return (ts.cccd.find(cccd) != string::npos);
-}
-
-bool CompareBySBD(ThiSinh &ts,string &sbd)
-{
-    return (ts.sbd.find(sbd) != string::npos);
-}
-
-bool CompareByYear(ThiSinh &ts,string &yearStr)
-{
-    int year = stoi(yearStr);
-    return (ts.date.year == year);
-}
-
-bool CompareByGender(ThiSinh &ts,  string &gender)
-{
-    
-    return (ts.gt.find(gender) != string::npos);
-}
-
-void DisplayFilteredData(LinkedList &list, const string &message, CompareFunc compareFunc, string compareValue)
-{
-    fflush(stdin);
-    node *p = list.getHead();
-    cout << message + ": ";
-    getline(cin, compareValue);
-    compareValue = capitalizeFirstLetter(compareValue);
-    Form();
-    while (p != NULL)
+    textcolor(b_color);
+    for (int iy = y + 1; iy <= y + h - 1; iy++)
     {
-        if (compareFunc(p->data, compareValue))
+        for (int ix = x + 1; ix <= x + w - 1; ix++)
         {
-            p->data.display();
+            gotoXY(ix, iy);
+            cout << " ";
         }
-        p = p->next;
     }
-    cout << "|";
-    for (int i = 0; i < 153; i++)
+    SetColor(7);
+    gotoXY(x + 1, y + 1);
+    cout << tieude;
+    textcolor(1);
+    SetColor(t_color);
+    if (h <= 1 || w <= 1)
+        return;
+    for (int ix = x; ix <= x + w; ix++)
     {
-        cout << "-";
+        gotoXY(ix, y);
+        cout << char(196);
+        gotoXY(ix, y + h);
+        cout << char(196);
     }
-    cout << "|" << endl;
-    system("pause");
-}
-
-void search_info(LinkedList &list)
-{
-    string value;
-    string c;
-    int lc;
-    do
+    for (int iy = y; iy <= y + h; iy++)
     {
-          system("cls");
-            cout << setw(105) << "CÁC THÔNG TIN CẦN TÌM" << endl;
-            cout << setw(75) << "+";
-          Form1();
-          cout << setw(75) << "+";
-            for (int i = 1; i <= 30; ++i)
-                cout << "-";
-            cout << "+" << endl;
-            cout << endl;
-        cout << setw(80) << "Mời nhập lựa chọn :";
-        cin >> lc;
-        while (lc < 0 || lc > 6)
-        {
-            fflush(stdin);
-            cout << "Lựa chọn của bạn là không hợp lệ!!! \n Hãy nhập lại: ";
-            cin >> lc;
-        }
-        switch (lc)
-        {
-        case 1:
-            DisplayFilteredData(list, "nhập tên bạn muốn hiển thị", CompareByName, value);
-            break;
-        case 2:
-            DisplayFilteredData(list, "nhập địa chỉ bạn muốn hiển thị", CompareByAddress, value);
-            break;
-        case 3:
-            DisplayFilteredData(list, "nhập những số trong cccd bạn muốn hiển thị", CompareByCCCD, value);
-            break;
-        case 4:
-            DisplayFilteredData(list, "nhập những số có trong số báo danh mà bạn muốn hiển thị", CompareBySBD, value);
-            break;
-        case 5:
-        {
-            string yearString;
-            DisplayFilteredData(list, "nhập năm sinh bạn muốn hiển thị", CompareByYear, value);
-            break;
-        }
-        case 6:
-            DisplayFilteredData(list, "Bạn muốn hiển thị giới tính nào (Nam/Nu)", CompareByGender, value);
-            break;
-        }
-        cout << "bạn có muốn tìm kiếm thông tin tiếp hay không? (y/n) ";
-        cin >> c;
-    } while (c == "y" || c == "Y");
-}
+        gotoXY(x, iy);
 
-void signin(string &name, string &sbd)
-{
-    fflush(stdin);
-    cout << "Tên: ";
-    getline(cin, name);
-    name = capitalizeFirstLetter(name);
-    cout << "sbd: ";
-    getline(cin, sbd);
+        cout << char(179);
+        gotoXY(x + w, iy);
+        cout << char(179);
+    }
+    gotoXY(x, y);
+    cout << char(218);
+    gotoXY(x + w, y);
+    cout << char(191);
+    gotoXY(x, y + h);
+    cout << char(192);
+    gotoXY(x + w, y + h);
+    cout << char(217);
 }
-void edit_infor(LinkedList &ds, string sbd, string name)
+void n_box(int x, int y, int w, int h, int t_color, int b_color, string nd[], int n)
 {
-    node *p = ds.search(ds, sbd, name);
-    string New;
-    int d;
-    string c;
-    Date date;
-    int luachon;
-    do
+    for (int i = 0; i < n; i++)
     {
-         system("cls");
-            cout << setw(105) << "CÁC THÔNG TIN CẦN SỬA" << endl;
-            cout << setw(75) << "+";
-        Form1();
-        cout << setw(75) << "|" << setw(31) << "|" << endl;
-        cout << setw(110) << "|   7. Điểm                    |\n";
-        cout << setw(75) << "+";
-            for (int i = 1; i <= 30; ++i)
-                cout << "-";
-            cout << "+" << endl;
-            cout << endl;
-        
-            cout << setw(80) << "Mời nhập lựa chọn :";
-            cin >> luachon;
-        while (luachon < 0 || luachon > 8)
+        box(x, y + i * 2, w, h, t_color, b_color, nd[i]);
+        if (i != 0)
         {
-            fflush(stdin);
-            cout << "Lựa chọn của bạn là không hợp lệ!!! \n Hãy nhập lại: ";
-            cin >> luachon;
+            gotoXY(x, y + i * 2);
+            cout << char(195);
+            gotoXY(x + 40, y + (i * 2));
+            cout << char(180);
         }
-        switch (luachon)
-        {
-        case 1:
-            if (ds.testempty())
-            {
-                cout << "Chưa có danh sách thí sinh dự thi." << endl;
-            }
-            else
-            {
-                cout << "Nhập lại tên: ";
-                cin.ignore();
-                getline(cin, New);
-                p->data.name = New;
-            }
-            break;
-        case 2:
-            if (ds.testempty())
-            {
-                cout << "Chưa có danh sách thí sinh dự thi." << endl;
-            }
-            else
-            {
-                string newAddress;
-                cout << "Nhập địa chỉ mới: ";
-                cin.ignore();
-                getline(cin, newAddress);
-                 p->data.address = newAddress;
-            }
-            break;
-         case 3:
-            if (ds.testempty())
-            {
-                cout << "Chưa có danh sách thí sinh dự thi." << endl;
-            }
-            else
-            {
-                string newCCCD;
-                cout << "Nhập số CCCD mới: ";
-                cin.ignore();
-                getline(cin, newCCCD);
-                 p->data.cccd = newCCCD;
-            }
-            break;
-        case 4:
-            if (ds.testempty())
-            {
-                cout << "Chưa có danh sách thí sinh dự thi." << endl;
-            }
-            else
-            {
-                string sbdnew;
-                cout << "Nhập số báo danh mới: ";
-                cin.ignore();
-                getline(cin, sbdnew);
-                 p->data.sbd = sbdnew;
-            }
-            break;
-            case 5:
-            if (ds.testempty())
-            {
-                cout << "Chưa có danh sách thí sinh dự thi." << endl;
-            }
-            else
-            {
-                int day, month, year;
-                cout << "Nhập lại ngày/tháng/năm sinh: " << endl;
-                cout << "Nhập ngày: ";
-                cin >> day;
-                cout << "Nhập tháng: ";
-                cin >> month;
-                cout << "Nhập năm: ";
-                cin >> year;
-                p->data.date.day = day;
-                p->data.date.month = month;
-                p->data.date.year = year;
-
-            }
-            break;
-        case 6:
-            if (ds.testempty())
-            {
-                cout << "Chưa có danh sách thí sinh dự thi." << endl;
-            }
-            else
-            {
-                string newgt;
-                cout << "Nhập giới tính mới: (0: Nam, 1: Nữ) ";
-                cin >> newgt;
-                p->data.gt = newgt;
-
-            }
-            break;
-        case 7:
-            if (ds.testempty())
-            {
-                cout << "Chưa có danh sách thí sinh dự thi." << endl;
-            }
-            else
-            {
-                float newMath, newPhysics, newChemistry;
-                cout << "Nhập điểm toán mới: ";
-                cin >> newMath;
-                cout << "Nhập điểm lý mới: ";
-                cin >> newPhysics;
-                cout << "Nhập điểm hóa mới: ";
-                cin >> newChemistry;
-                p->data.to=newMath;
-                p->data.to=newPhysics;
-                p->data.ho = newChemistry;
-            }
-            break;
-        }
-        cout << "bạn có muốn tìm kiếm thông tin tiếp hay không?(y/n) ";
-        cin >> c;
-    } while (c == "y" || c == "Y");
-}
-float tim_nghanh(string s)
-{
-    string str ;
-    int result ;
-    mofile();
-    Nganhdaotao *p = pHead;
-            while (p != NULL)
-            {
-                result = strcmp(p->TenNganh.c_str(), s.c_str());
-                if (result == 0){
-                    return p->DiemChuan;
-                }
-                p = p->next;
-            }
-    cout << "Không có tên ngành này !" << endl;
-        return 0;
-}
-
-void check_dau(LinkedList &ds){
-    fflush(stdin);
-    ThiSinh thisinh;
-    string name;
-    string sbd;
-    string ten_nganh;
-    float diem ;
-    node *p = ds.search(ds, sbd, name);
-    signin(name,sbd);
-    cout <<"Mời bạn nhập nghành muốn kiểm tra " ;
-    getline(cin, ten_nganh);
-    diem = tim_nghanh(ten_nganh);
-    if(ds.search(ds, sbd,name) != NULL){
-        if(p->data.sum > diem)
-            cout << "Bạn đã đậu nghành " <<name <<endl;
-        else cout <<"Rất tiếc điểm của bạn chưa đủ đậu nghành " << name << endl;
     }
 }
-
-int main()
+void thanh_sang(int x, int y, int w, int h, int b_color, string tieude)
 {
+    textcolor(b_color);
+    for (int iy = y + 1; iy <= y + h - 1; iy++)
+    {
+        for (int ix = x + 1; ix <= x + w - 1; ix++)
+        {
+            gotoXY(ix, iy);
+            cout << " ";
+        }
+    }
+    SetColor(7);
+    gotoXY(x + 1, y + 1);
+    cout << tieude;
+}
+void inMenu(int x, int y, int w, int h, int t_color, int b_color, int b_color_sang, string nd[], int n)
+{
+    SetColor(75);
+    gotoXY(60, 3);
+    cout << "QUAN LI CAC THI SINH DU THI VAO MOT TRUONG DAI HOC";
+    n_box(x, y, w, h, t_color, b_color, nd, n);
+    thanh_sang(x, y, w, h, b_color_sang, nd[0]);
+}
+void menu()
+{
+    system("cls");
     LinkedList danhsach;
+    LinkedList list(danhsach);
+    danhsach.docfile();
+    LinkedList ds;
     ThiSinh ts;
     string sbd;
     string name;
     int option;
-    danhsach.docfile();
-    do
+    ShowCur(0);
+    int w = 40;
+    int h = 2;
+    string nd[10] = {"XUAT DANH SACH CAC THI SINH", "THEM MOT THI SINH", "XOA MOT THI SINH", "SUA THONG TIN THI SINH", "TIM KIEM THONG TIN THI SINH", "SAP XEP DANH SACH THEO DIEM", "DANH DACH DAU DAI HOC", "DANH SACH DAU THEO NGANH", "THOAT"};
+    int n = 9;
+    bool kt = false;
+    int b_color = 1;
+    int pointer = 0;
+    int t_color = 11;
+    int b_color_sang = 75;
+    inMenu(x, y, w, h, t_color, b_color, b_color_sang, nd, n);
+    int xp = x;
+    int yp = y;
+    int xcu = xp;
+    int ycu = yp;
+    int i = 0;
+    int d = 0;
+    while (true)
     {
-         system("cls");
-        //TextColor(4);
-        cout << setw(135) << "~- QUẢN LÝ ĐIỂM THI CỦA CÁC THÍ SINH VÀO MỘT TRƯỜNG ĐẠI HỌC -~" << endl;
-        //TextColor(10);
-        cout << setw(27);
-        for (int i = 1; i <= 125; ++i)
-            cout << "-";
-        cout << setw(124) << "DANH SÁCH CÁC THAO TÁC";
-        cout << setw(140) << "+";
-        for (int i = 1; i <= 50; ++i)
-            cout << "-";
-        cout << "+" << endl;
-        cout << setw(114) << "|   1. Thêm 1 thí sinh vào danh sách.              |\n";
-        cout << setw(58) << "|" << setw(51) << "|" << endl;
-        cout << setw(116) << "|   2. Xoá 1 thí sinh khỏi danh sách.              |\n ";
-        cout << setw(57) << "|" << setw(51) << "|" << endl;
-        cout << setw(114) << "|   3. Sửa thông tin 1 thí sinh.                   |\n";
-        cout << setw(58) << "|" << setw(51) << "|" << endl;
-        cout << setw(118) << "|   4. Xuất thông tin của một thí sinh.            |\n";
-        cout << setw(58) << "|" << setw(51) << "|" << endl;
-        cout << setw(118) << "|   5. Tìm kiếm các thông tin của thí sinh.        |\n";
-        cout << setw(58) << "|" << setw(51) << "|" << endl;
-        cout << setw(121) << "|   6. Danh sách các thí sinh đậu đại học.         |\n";
-        cout << setw(58) << "|" << setw(51) << "|" << endl;
-        cout << setw(117) << "|   7. Danh sách các ngành đào tạo.                |\n";
-        cout << setw(58) << "|" << setw(51) << "|" << endl;
-        cout << setw(118) << "|   8. Sắp xếp danh sách theo điểm.                |\n";
-        cout << setw(58) << "|" << setw(51) << "|" << endl;
-        cout << setw(119) << "|   9. Tìm điểm chuẩn của nghành.                  |\n";
-        cout << setw(58) << "|" << setw(51) << "|" << endl;
-        cout << setw(111) << "|   0. Thoát.                                      |\n";
-        cout << setw(58) << "|" << setw(51) << "|" << endl;
-        cout << setw(58) << "+";
-        for (int i = 1; i <= 50; ++i)
-            cout << "-";
-        cout << "+" << endl;
-        cout << endl;
-        //TextColor(7);
-        cout << setw(80) << "Mời nhập lựa chọn : ";
-        cin >> option;
-        while (option < 0 || option > 9)
+        if (kt == true)
         {
-            fflush(stdin);
-            cout << "Lựa chọn của bạn là không hợp lệ!!! \n Hãy nhập lại: ";
-            cin >> option;
+            gotoXY(xcu, ycu);
+            thanh_sang(xcu, ycu, w, h, b_color, nd[i]);
+            xcu = xp;
+            ycu = yp;
+            thanh_sang(xp, yp, w, h, b_color_sang, nd[d]);
+            kt = false;
+            i = d;
         }
-        switch (option)
+
+        if (_kbhit())
         {
-        case 0:
-            break;
-        case 1:
-        {
-            ts.input();
-            danhsach.insert(ts);
-            danhsach.ghifile();
-            cout << "Đã thêm thành công\n";
-            system("pause");
-            break;
-        }
-        case 2:
-        {
-            for (int i = 0; i < 50; i++)
-                cout << "-";
-            cout << endl;
-            cout << "Bạn muốn xóa thông tin của ai:" << endl;
-             signin(name, sbd);
-            if (danhsach.search(danhsach, sbd, name) != NULL)
+            char cs;
+            char c = _getch();
+            if (c == -32)
             {
-                if (danhsach.Delete(danhsach,sbd, name) == true)
-                    cout << "Đã xóa thành công\n";
-                else
-                    cout << "Không xóa được thông tin này" << endl;
+                kt = true;
+                c = _getch();
+                if (c == 72)
+                {
+                    if (yp != y)
+                    {
+                        yp -= 2;
+                        d = i - 1;
+                    }
+                    else
+                    {
+                        yp = y + h * (n - 1);
+                        d = (i - 1 + (n)) % n;
+                    }
+                }
+                else if (c == 80)
+                {
+                    if (yp != y + h * (n - 1))
+                    {
+                        yp += 2;
+                        d = i + 1;
+                    }
+                    else
+                    {
+                        yp = y;
+                        d = (i + 1) % n;
+                    }
+                }
             }
-            else
-                cout << "Không tìm thấy thông tin cần xóa" << endl;
-            system("pause");
-            break;
-        }
-        case 3:
-        {
-            for (int i = 0; i < 50; i++)
-                cout << "-";
-            cout << endl;
-            cout << "Bạn muốn sửa thông tin của ai:" << endl;
-            signin(name, sbd);
-            if (danhsach.search(danhsach, sbd, name) != NULL)
+            else if (c == 13)
             {
-                edit_infor(danhsach, sbd, name);
-                danhsach.ghifile();
-                cout << "Đã cập nhật thông tin\n";
-            }
-            else
-                cout << "Không tìm thấy thông tin cần sửa" << endl;
-            system("pause");
-            break;
-        }
-        case 4:
-        {
-            Form();
-            danhsach.xuat();
-            system("pause");
-            break;
-        }
-        case 5:
-        {
-            for (int i = 0; i < 50; i++)
-                cout << "-";
-            cout << endl;
-            cout << "Bạn muốn tìm kiếm thông qua thông tin gì?" << endl;
-            search_info(danhsach);
-            system("pause");
-            break;
-        }
-        case 6:
-        {
-           
-            system("pause");
-            break;
-        }
-        case 7:
-        {
-            output();
-            system("pause");
-            break;
-        }
-        case 8:
-        {
-            danhsach.sapxepdiem();
-            danhsach.xuat();
-            system("pause");
-            break;
-        }
-        case 9:
-            {
-                string c ;
-                do{
-                    string name;
+                system("cls");
+                system("COLOR F0");
+                switch (d)
+                {
+                case 0:
+                {
+                    gotoXY(45, 2);
+                    cout << "DANH SACH CAC THI SINH DU THI VAO MOT TRUONG DAI HOC";
+                    gotoXY(0, 4);
+                    danhsach.xuat();
+                    system("pause");
+                    system("COLOR 0A");
+                    system("cls");
+                    break;
+                }
+                case 1:
+                {
+                    output();
+                    ts.input();
+                    danhsach.insert(ts);
+                    ts.wishes.clear();
+                    danhsach.ghifile();
+                    gotoXY(22, 31);
+                    cout << "Da them thanh cong";
+                    gotoXY(22, 33);
+                    system("pause");
+                    system("COLOR 0A");
+                    system("cls");
+                    break;
+                }
+                case 2:
+                {
+                    draw(60, 2, 90, 10);
+                    SetColor1(7, 2);
+                    gotoXY(62, 4);
+                    cout << "Nhap thong tin ban muon xoa:" << endl;
                     fflush(stdin);
-                    cout << "\nNhập tên nghành muốn biết điểm chuẩn : " ;
-                    getline(cin,name);
+                    SetColor1(7, 4);
+                    gotoXY(62, 6);
+                    cout << "Ten: ";
+                    getline(cin, name);
+                    gotoXY(62, 7);
+                    cout << "sbd: ";
+                    getline(cin, sbd);
+                    if (danhsach.search(sbd, name) != NULL)
+                    {
+                        if (danhsach.Delete(sbd, name) == true)
+                        {
+                            gotoXY(62, 9);
+                            cout << "Da xoa thanh cong\n";
+                        }
+                        else
+                        {
+                            gotoXY(62, 9);
+                            cout << "Khong xoa duoc thong tin nay" << endl;
+                        }
+                    }
+                    else
+                    {
+                        gotoXY(62, 9);
+                        cout << "Khong tim thay thong tin" << endl;
+                    }
+                    system("pause");
+                    system("COLOR 0A");
+                    system("cls");
+                    break;
+                }
+                case 3:
+                {
+                    draw(60, 2, 90, 10);
+                    SetColor1(7, 4);
+                    gotoXY(62, 4);
+                    cout << "Nhap thong tin ban muon sua:" << endl;
                     fflush(stdin);
-                    cout << "Điểm chuẩn của nghành "<< name << " : "<<tim_nghanh(name)<< endl;
-                    cout << "Bạn muốn biết tiếp tục tìm kiếm điểm chuẩn ? (y or n)" ;
-                    cin >> c;
-                }while(c == "y");
-                break;
+                    SetColor1(7, 4);
+                    gotoXY(62, 6);
+                    cout << "Ten: ";
+                    getline(cin, name);
+                    gotoXY(62, 7);
+                    cout << "sbd: ";
+                    getline(cin, sbd);
+                    if (danhsach.search(sbd, name) != NULL)
+                    {
+                        edit_infor(danhsach, sbd, name);
+                        danhsach.ghifile();
+                        gotoXY(0, 20);
+                        danhsach.xuat();
+                    }
+                    else
+                    {
+                        gotoXY(62, 9);
+                        cout << "khong tim thay thong tin" << endl;
+                    }
+                    system("pause");
+                    system("COLOR 0A");
+                    system("cls");
+                    break;
+                }
+                case 4:
+                {
+                    for (int i = 0; i < 50; i++)
+                        cout << "-";
+                    cout << endl;
+                    cout << "Ban muon tim kiem thong qua thong tin nao?" << endl;
+                    search_info(danhsach);
+                    system("pause");
+                    system("COLOR 0A");
+                    system("cls");
+                    break;
+                }
+                case 5:
+                {
+                    gotoXY(45, 2);
+                    cout << "DANH SACH THI SINH DA DUOC SAP XEP DIEM THEO THU TU GIAM DAN";
+                    gotoXY(0, 4);
+                    danhsach.sapxepdiem().xuat();
+                    system("pause");
+                    system("COLOR 0A");
+                    system("cls");
+                    break;
+                }
+                case 6:
+                {
+                    gotoXY(60, 2);
+                    cout << "DANH SACH THI SINH DAU DAI HOC";
+                    gotoXY(0, 4);
+                    ds = check_dau(danhsach);
+                    Form2();
+                    node *temp = ds.head;
+                    string tenganh;
+                    while (temp != NULL)
+                    {
+                        cout << "|";
+                        for (int i = 0; i < 165; i++)
+                            cout << "-";
+                        temp->data.display();
+                        tenganh = temp->data.wishes.front();
+                        cout << tim_ma_nganh(tenganh);
+                        cout << setw(5) << "|";
+                        cout << endl;
+                        temp = temp->next;
+                    }
+                    cout << "|";
+                    for (int i = 0; i < 165; i++)
+                        cout << "-";
+                    cout << "|" << endl;
+                    system("pause");
+                    system("COLOR 0A");
+                    system("cls");
+                    break;
+                }
+                case 7:
+                {
+                    string tennganh, str;
+                    cout << "Nhap ten nganh: ";
+                    getline(cin, tennganh);
+                    str = tennganh;
+                    system("cls");
+                    gotoXY(20, 4);
+                    ds = check_dau(danhsach);
+                    gotoXY(50, 2);
+                    for (int i = 0; i < tennganh.size(); i++)
+                    {
+                        str[i] = toupper(str[i]);
+                    }
+                    cout << "DANH SACH CAC THI SINH DAU NGANH " + str << endl;
+                    gotoXY(0, 4);
+                    Form2();
+                    node *temp = ds.head;
+                    string tenganh1;
+                    while (temp != NULL)
+                    {
+                        if (temp->data.wishes.front() == tennganh)
+                        {
+                            cout << "|";
+                            for (int i = 0; i < 165; i++)
+                                cout << "-";
+                            temp->data.display();
+                            tenganh1 = temp->data.wishes.front();
+                            cout << tim_ma_nganh(tenganh1);
+                            cout << setw(5) << "|";
+                            cout << endl;
+                        }
+                        temp = temp->next;
+                    }
+                    cout << "|";
+                    for (int i = 0; i < 165; i++)
+                        cout << "-";
+                    cout << "|" << endl;
+
+                    system("pause");
+                    system("COLOR 0A");
+                    system("cls");
+                    break;
+                }
+                case 8:
+                {
+                    gotoXY(70, 10);
+                    std::string text = "Thank you";
+                    for (char c : text)
+                    {
+                        std::cout << c;
+                        std::flush(std::cout);
+                        usleep(500000); // Chờ 0.5 giây
+                    }
+                    exit(0);
+                    break;
+                }
+                }
+                n_box(x, y, w, h, t_color, b_color, nd, n);
             }
         }
-    } while (option != false);
+    }
+}
+int main()
+{
+    SetConsoleOutputCP(437);
+    menu();
+    return 0;
 }
